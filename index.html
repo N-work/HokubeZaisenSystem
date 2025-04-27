@@ -1,19 +1,264 @@
 <!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>北部鉄道在線システム</title>
-</head>
-<body>
-    <h1>北部鉄道在線システム</h1>
-    <table border="1">
-        <thead>
-          <tr id="tableHeader"></tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-      </table>
-      
-    <script src="script.js"></script>
-</body>
+    <html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>北部在線モニタ</title>
+        <style>
+            body{
+                background-color: black
+            };
+        </style>
+    </head>
+    <body>
+        <div id="svgDiv">
+        <svg id="svgCanvas" width="1720" height="800">
+            <!-- なかちごう -->
+            <line id = "naka1" x1="30" y1="150" x2="150" y2="150" stroke="white" stroke-width="3" />
+            <line id = "naka2" x1="30" y1="200" x2="150" y2="200" stroke="white" stroke-width="3" />
+            <line id = "naka3" x1="30" y1="250" x2="150" y2="250" stroke="white" stroke-width="3" />
+            <rect x="30" y="160" width="80" height="30" stroke="white" fill="deepskyblue" stroke-width="1"></rect>
+            <rect x="30" y="210" width="80" height="30" stroke="white" fill="deepskyblue" stroke-width="1"></rect>
+            <text x="70" y="180" font-size="15" font-weight="bold" text-anchor="middle" fill="white">なかちごう</text>
+            <!-- なかちごうーしのばえ-->
+            <line x1="150" y1="150" x2="200" y2="170" stroke="white" stroke-width="3" />
+            <line x1="150" y1="200" x2="200" y2="230" stroke="white" stroke-width="3" />
+            <line x1="150" y1="250" x2="200" y2="230" stroke="white" stroke-width="3" />
+            <line id = "naka-sino" x1="200" y1="170" x2="300" y2="170" stroke="white" stroke-width="3" />
+            <line id = "sino-naka" x1="200" y1="230" x2="300" y2="230" stroke="white" stroke-width="3" />
+            <line x1="200" y1="170" x2="300" y2="230" stroke="white" stroke-width="3" />
+            <line x1="200" y1="230" x2="300" y2="170" stroke="white" stroke-width="3" />
+            <line x1="300" y1="170" x2="350" y2="170" stroke="white" stroke-width="3" />
+            <line x1="300" y1="230" x2="350" y2="230" stroke="white" stroke-width="3" />
+            <!-- しのばえ-->
+            <rect x="350" y="130" width="80" height="30" stroke="white" fill="deepskyblue" stroke-width="1"></rect>
+            <rect x="350" y="240" width="80" height="30" stroke="white" fill="deepskyblue" stroke-width="1"></rect>
+            <line id = "sino2" x1="350" y1="170" x2="450" y2="170" stroke="white" stroke-width="3" />
+            <line id = "sino1" x1="350" y1="230" x2="450" y2="230" stroke="white" stroke-width="3" />
+            <text x="390" y="205" font-size="15" font-weight="bold" text-anchor="middle" fill="white">しのばえ</text>
+            <!-- しのばえーやつかわみね-->
+            <line id = "sino-yatu" x1="450" y1="170" x2="550" y2="170" stroke="white" stroke-width="3" />
+            <line id = "yatu-sino" x1="450" y1="230" x2="550" y2="230" stroke="white" stroke-width="3" />
+            <!-- やつかわみね-->
+            <rect x="550" y="185" width="80" height="30" stroke="white" fill="deepskyblue" stroke-width="1"></rect>
+            <line id = "yatu2" x1="550" y1="170" x2="650" y2="170" stroke="white" stroke-width="3" />
+            <line id = "yatu1" x1="550" y1="230" x2="650" y2="230" stroke="white" stroke-width="3" />
+            <text x="590" y="205" font-size="13" font-weight="bold" text-anchor="middle" fill="white">やつかわみね</text>
+            <!-- やつかわみねーあらさき-->
+            <line x1="650" y1="230" x2="700" y2="170" stroke="white" stroke-width="3" />
+            <line x1="650" y1="170" x2="750" y2="170" stroke="white" stroke-width="3" />
+            <line x1="650" y1="230" x2="750" y2="230" stroke="white" stroke-width="3" />
+            <line id = "yatu-ara" x1="750" y1="170" x2="850" y2="170" stroke="white" stroke-width="3" />
+            <line id = "ara-yatu" x1="750" y1="230" x2="850" y2="230" stroke="white" stroke-width="3" />
+            <line x1="750" y1="170" x2="850" y2="230" stroke="white" stroke-width="3" />
+            <line x1="750" y1="230" x2="850" y2="170" stroke="white" stroke-width="3" />
+            <line x1="850" y1="170" x2="900" y2="140" stroke="white" stroke-width="3" />
+            <line x1="850" y1="230" x2="900" y2="260" stroke="white" stroke-width="3" />
+            <line x1="900" y1="140" x2="1000" y2="140" stroke="white" stroke-width="3" />
+            <line x1="900" y1="260" x2="1000" y2="260" stroke="white" stroke-width="3" />
+            <line x1="900" y1="180" x2="1000" y2="180" stroke="white" stroke-width="3" />
+            <line x1="900" y1="220" x2="1000" y2="220" stroke="white" stroke-width="3" />
+            <line x1="1000" y1="140" x2="1050" y2="110" stroke="white" stroke-width="3" />
+            <line x1="1000" y1="260" x2="1050" y2="290" stroke="white" stroke-width="3" />
+            <line x1="1000" y1="180" x2="1050" y2="180" stroke="white" stroke-width="3" />
+            <line x1="1000" y1="220" x2="1050" y2="220" stroke="white" stroke-width="3" />
+            <line x1="1050" y1="110" x2="1150" y2="110" stroke="white" stroke-width="3" />
+            <line x1="1050" y1="290" x2="1150" y2="290" stroke="white" stroke-width="3" />
+            <line x1="1050" y1="180" x2="1150" y2="180" stroke="white" stroke-width="3" />
+            <line x1="1050" y1="220" x2="1150" y2="220" stroke="white" stroke-width="3" />
+            <line x1="1050" y1="290" x2="1150" y2="220" stroke="white" stroke-width="3" />
+            <line x1="1050" y1="220" x2="1150" y2="290" stroke="white" stroke-width="3" />
+            <line x1="1050" y1="110" x2="1150" y2="180" stroke="white" stroke-width="3" />
+            <line x1="1050" y1="180" x2="1150" y2="110" stroke="white" stroke-width="3" />
+            <line x1="1150" y1="110" x2="1250" y2="70" stroke="white" stroke-width="3" />
+            <line x1="1150" y1="110" x2="1250" y2="110" stroke="white" stroke-width="3" />
+            <line x1="1150" y1="290" x2="1250" y2="290" stroke="white" stroke-width="3" />
+            <line x1="1150" y1="180" x2="1250" y2="180" stroke="white" stroke-width="3" />
+            <line x1="1150" y1="220" x2="1250" y2="220" stroke="white" stroke-width="3" />
+            <!-- あらさき-->
+            <rect x="1260" y="25" width="80" height="30" stroke="white" fill="deepskyblue" stroke-width="1"></rect>
+            <rect x="1260" y="130" width="80" height="30" stroke="white" fill="deepskyblue" stroke-width="1"></rect>
+            <rect x="1260" y="240" width="80" height="30" stroke="white" fill="deepskyblue" stroke-width="1"></rect>
+            <line id = "ara3" x1="1250" y1="110" x2="1350" y2="110" stroke="white" stroke-width="3" />
+            <line id = "ara6"x1="1250" y1="290" x2="1350" y2="290" stroke="white" stroke-width="3" />
+            <line id = "ara4" x1="1250" y1="180" x2="1350" y2="180" stroke="white" stroke-width="3" />
+            <line id = "ara5" x1="1250" y1="220" x2="1350" y2="220" stroke="white" stroke-width="3" />
+            <line id = "ara2" x1="1250" y1="70" x2="1350" y2="70" stroke="white" stroke-width="3" />
+            <line id = "ara1" x1="1250" y1="10" x2="1350" y2="10" stroke="white" stroke-width="3" />
+            <text x="1300" y="150" font-size="15" font-weight="bold" text-anchor="middle" fill="white">あらさき</text>
+            <!-- あらさきーさきもと-->
+            <line x1="1350" y1="110" x2="1450" y2="180" stroke="white" stroke-width="3" />
+            <line x1="1350" y1="290" x2="1450" y2="220" stroke="white" stroke-width="3" />
+            <line x1="1350" y1="180" x2="1450" y2="180" stroke="white" stroke-width="3" />
+            <line x1="1350" y1="220" x2="1450" y2="220" stroke="white" stroke-width="3" />
+            <line x1="1350" y1="70" x2="1450" y2="70" stroke="white" stroke-width="3" />
+            <line x1="1350" y1="10" x2="1450" y2="70" stroke="white" stroke-width="3" />
+            <line x1="1450" y1="220" x2="1550" y2="220" stroke="white" stroke-width="3" />
+            <line x1="1450" y1="180" x2="1550" y2="180" stroke="white" stroke-width="3" />
+            <line x1="1450" y1="220" x2="1550" y2="180" stroke="white" stroke-width="3" />
+            <line x1="1450" y1="180" x2="1550" y2="220" stroke="white" stroke-width="3" />
+            <line x1="1450" y1="70" x2="1550" y2="130" stroke="white" stroke-width="3" />
+            <line id = "saki-ara" x1="1550" y1="220" x2="1720" y2="220" stroke="white" stroke-width="3" />
+            <line id = "ara-saki" x1="1550" y1="180" x2="1720" y2="180" stroke="white" stroke-width="3" />
+            <line x1="1550" y1="130" x2="1650" y2="130" stroke="white" stroke-width="3" />
+            <line x1="1650" y1="130" x2="1720" y2="180" stroke="white" stroke-width="3" />
+            <line x1="1650" y1="180" x2="1720" y2="130" stroke="white" stroke-width="3" />
+            <!-- さきもと -->
+            <line id = "saki2" x1="0" y1="420" x2="150" y2="420" stroke="white" stroke-width="3" />
+            <line id = "saki1" x1="0" y1="480" x2="150" y2="480" stroke="white" stroke-width="3" />
+            <rect x="30" y="370" width="80" height="30" stroke="white" fill="deepskyblue" stroke-width="1"></rect>
+            <rect x="30" y="500" width="80" height="30" stroke="white" fill="deepskyblue" stroke-width="1"></rect>
+            <text x="70" y="455" font-size="15" font-weight="bold" text-anchor="middle" fill="white">さきもと</text>
+            <!-- さきもとーよし-->
+            <line id = "saki-yosi" x1="150" y1="420" x2="250" y2="420" stroke="white" stroke-width="3" />
+            <line id = "yosi-saki" x1="150" y1="480" x2="250" y2="480" stroke="white" stroke-width="3" />
+            <line x1="200" y1="480" x2="240" y2="550" stroke="white" stroke-width="3" />
+            <!-- よし-->
+            <line id = "yosi1" x1="250" y1="420" x2="350" y2="420" stroke="white" stroke-width="3" />
+            <line id = "yosi2" x1="250" y1="480" x2="350" y2="480" stroke="white" stroke-width="3" />
+            <line id = "yosi3" x1="240" y1="550" x2="350" y2="550" stroke="white" stroke-width="3" />
+            <rect x="250" y="370" width="80" height="30" stroke="white" fill="deepskyblue" stroke-width="1"></rect>
+            <rect x="250" y="500" width="80" height="30" stroke="white" fill="deepskyblue" stroke-width="1"></rect>
+            <text x="290" y="455" font-size="15" font-weight="bold" text-anchor="middle" fill="white">よし</text>
+            <!-- よしーすずひのみや-->
+            <line x1="350" y1="420" x2="500" y2="420" stroke="white" stroke-width="3" />
+            <line x1="350" y1="480" x2="500" y2="480" stroke="white" stroke-width="3" />
+            <line x1="500" y1="520" x2="550" y2="480" stroke="white" stroke-width="3" />
+            <line x1="400" y1="520" x2="500" y2="520" stroke="white" stroke-width="3" />
+            <line x1="570" y1="480" x2="620" y2="420" stroke="white" stroke-width="3" />
+            <line x1="640" y1="420" x2="730" y2="350" stroke="white" stroke-width="3" />
+            <line x1="680" y1="390" x2="800" y2="390" stroke="white" stroke-width="3" />
+            <line id = "yosi-suzu" x1="500" y1="420" x2="650" y2="420" stroke="white" stroke-width="3" />
+            <line id = "suzu-yosi" x1="500" y1="480" x2="650" y2="480" stroke="white" stroke-width="3" />
+            <!-- すずひのみや-->
+            <line id = "suzu1" x1="650" y1="420" x2="800" y2="420" stroke="white" stroke-width="3" />
+            <line id = "suzu2" x1="650" y1="480" x2="800" y2="480" stroke="white" stroke-width="3" />
+            <rect x="700" y="435" width="80" height="30" stroke="white" fill="deepskyblue" stroke-width="1"></rect>
+            <text x="740" y="455" font-size="13" font-weight="bold" text-anchor="middle" fill="white">すずひのみや</text>
+        </svg>
+        </div>
+
+        <script>
+            const data_format = {
+                "なかちごう 上り":"naka2",
+                "しのばえ-なかちごう 上り":"sino-naka",
+                "しのばえ 上り":"sino1",
+                "やつかわみね-しのばえ 上り":"yatu-sino",
+                "やつかわみね 上り":"yatu1",
+                "あらさき-やつかわみね 上り":"ara-yatu",
+                "あらさき 上り":"ara5",
+                "さきもと-あらさき 上り":"saki-ara",
+                "さきもと 上り":"saki1",
+                "よし-さきもと 上り":"yosi-saki",
+                "よし 上り":"yosi1",
+                "すずひのみや-よし 上り":"suzu-yosi",
+                "すずひのみや 上り":"suzu1",
+
+                "なかちごう-しのばえ 下り":"naka-sino",
+                "しのばえ 下り":"sino2",
+                "しのばえ-やつかわみね 下り":"sino-yatu",
+                "やつかわみね 下り":"yatu2",
+                "やつかわみね-あらさき 下り":"yatu-ara",
+                "あらさき 下り":"ara4",
+                "あらさき-さきもと 下り":"ara-saki",
+                "さきもと 下り":"saki2",
+                "さきもと-よし 下り":"saki-yosi",
+                "よし 下り":"yosi2",
+                "よし-すずひのみや 下り":"yosi-suzu",
+                "すずひのみや 下り":"suzu2",
+            };
+
+            // JSONを取得するURL
+            const url = "https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLi21dSzfLYGxjcZFhWt3_dl68TlDMLGnXJ3VetsQbynU57xNRTcIJPyBYXQr-04r7s-ZC2xipLMLVbh3mNRvGsT7xCbgdE2AYm8NydW-lza4HoPMVb5224hn9wmJiYJ-WNtQW5WNJp0CfguqRTMoaGtaz8GCxSnHbJMxApRWIqoHIMWtBoknyns2ZIe9Rzjor3bkbe-20iVT7CTJoqWUW_UWLjAJeb_5MwPwuQADXvzR5PGVU1V-SyZtpyogGIggDf-OuoMzh14mcaoVphtNyxyrFMS6A&lib=MZZ2LbslH7viUS2qS1RGgz6MxuYimDxfa";
+
+            // JSONデータを取得して文字列を出力
+            function fetchJsonData() {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("ネットワークエラーが発生しました");
+                    }
+                    return response.json(); // JSONをパース
+                })
+                .then(data => {
+                    // JSONデータを文字として出力
+
+                    // id="Train"の要素をすべて取得
+                    const trainElements = document.querySelectorAll("#Train");
+
+                    // 取得した要素をループで削除
+                    trainElements.forEach(element => {
+                        element.remove();
+                    });
+                    data.forEach(item => {
+                        console.log(`TrainName: ${item.TrainName}, Type: ${item.Type}, For: ${item.For}, NowPos: ${item.NowPos}, Time: ${item.time}`);
+
+                        const target = document.getElementById(data_format[item.NowPos]);
+                    const targetX = Number(target.getAttribute("x1"));
+                    const targetY = Number(target.getAttribute("y1"));
+                    const svgCanvas = document.getElementById("svgCanvas");
+
+                    const newLine = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                    newLine.setAttribute("id","Train")
+                    newLine.setAttribute("x", targetX+80);
+                    newLine.setAttribute("y", targetY);
+                    newLine.setAttribute("width", "60");
+                    newLine.setAttribute("height", "15");
+                    newLine.setAttribute("fill","gray")
+                    newLine.setAttribute("stroke-width", "3");
+                    svgCanvas.appendChild(newLine);
+
+                    const newLine2 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                    newLine2.setAttribute("id","Train")
+                    newLine2.setAttribute("x", targetX);
+                    newLine2.setAttribute("y", targetY-20);
+                    newLine2.setAttribute("width", "80");
+                    newLine2.setAttribute("height", "35");
+                    newLine2.setAttribute("stroke", "red");
+                    newLine2.setAttribute("fill","white")
+                    newLine2.setAttribute("stroke-width", "3");
+                    svgCanvas.appendChild(newLine2);
+
+                    const newText1 = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    newText1.setAttribute("id","Train");
+                    newText1.setAttribute("x",targetX+110);
+                    newText1.setAttribute("y",targetY+11);
+                    newText1.setAttribute("font-size","10");
+                    newText1.setAttribute("font-wwight","bold");
+                    newText1.setAttribute("text-anchor","middle");
+                    newText1.setAttribute("fill","white");
+                    newText1.textContent = item.TrainName;
+                    svgCanvas.appendChild(newText1);
+
+                    const newText2 = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    newText2.setAttribute("id","Train");
+                    newText2.setAttribute("x",targetX+40);
+                    newText2.setAttribute("y",targetY-5);
+                    newText2.setAttribute("font-size","13");
+                    newText2.setAttribute("font-wwight","bold");
+                    newText2.setAttribute("text-anchor","middle");
+                    newText2.setAttribute("fill","blue");
+                    newText2.textContent = item.Type;
+                    svgCanvas.appendChild(newText2);
+
+                    const newText3 = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    newText3.setAttribute("id","Train");
+                    newText3.setAttribute("x",targetX+40);
+                    newText3.setAttribute("y",targetY+10);
+                    newText3.setAttribute("font-size","13");
+                    newText3.setAttribute("font-wwight","bold");
+                    newText3.setAttribute("text-anchor","middle");
+                    newText3.setAttribute("fill","black");
+                    newText3.textContent = item.For;
+                    svgCanvas.appendChild(newText3);
+                    });
+                })
+                .catch(error => {
+                    console.error("エラー:", error);
+                });
+            }
+
+            fetchJsonData();
+            setInterval(fetchJsonData, 5000);
+        </script>
+    </body>
 </html>
